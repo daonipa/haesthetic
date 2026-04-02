@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H'AESTHETIC — Custom Skin Care</title>
+  <meta name="description" content="당신의 피부엔 교과서가 없습니다. H'AESTHETIC은 전문 상담을 통해 피부 컨디션을 먼저 파악한 뒤, 맞춤형 피부관리를 설계합니다.">
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <script src="https://code.iconify.design/iconify-icon/2.3.0/iconify-icon.min.js"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Pretendard', 'system-ui', 'sans-serif'],
+            display: ['Outfit', 'Pretendard', 'sans-serif'],
+          },
+          colors: {
+            accent: '#E86524',
+            'accent-light': '#FF8042',
+            dark: {
+              950: '#050505',
+              900: '#0a0a0a',
+              800: '#131314',
+              700: '#1a1a1b',
+              600: '#222224',
+              500: '#2a2a2c',
+            },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { word-break: keep-all; }
+    html { scroll-behavior: smooth; }
+
+    /* Noise overlay */
+    .noise-overlay {
+      position: fixed;
+      inset: 0;
+      z-index: 60;
+      pointer-events: none;
+      opacity: 0.03;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    /* Scroll animation */
+    .reveal {
+      opacity: 0;
+      transform: translateY(2rem);
+      filter: blur(4px);
+      transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+      filter: blur(0);
+    }
+
+    /* Stagger children */
+    .stagger > .reveal:nth-child(1) { transition-delay: 0ms; }
+    .stagger > .reveal:nth-child(2) { transition-delay: 100ms; }
+    .stagger > .reveal:nth-child(3) { transition-delay: 200ms; }
+    .stagger > .reveal:nth-child(4) { transition-delay: 300ms; }
+    .stagger > .reveal:nth-child(5) { transition-delay: 400ms; }
+
+    /* Float animation */
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-15px) rotate(1deg); }
+    }
+
+    @keyframes float-reverse {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(12px) rotate(-1deg); }
+    }
+
+    /* Gradient rotation */
+    @keyframes gradientRotate {
+      0% { transform: rotate(0deg) scale(1); }
+      50% { transform: rotate(180deg) scale(1.1); }
+      100% { transform: rotate(360deg) scale(1); }
+    }
+
+    /* Marquee */
+    @keyframes marquee {
+      0% { transform: translateX(0); }
+      100% { transform: translateX(-50%); }
+    }
+
+    /* Spring transition for all interactive */
+    a, button, .interactive {
+      transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    /* Font variant for numbers */
+    .tabular-nums { font-variant-numeric: tabular-nums; }
+
+    /* Scrollbar */
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #0a0a0a; }
+    ::-webkit-scrollbar-thumb { background: #E86524; border-radius: 3px; }
+  </style>
+</head>
+<body class="bg-dark-950 text-white font-sans antialiased overflow-x-hidden">
+
+  <!-- Noise Overlay -->
+  <div class="noise-overlay"></div>
+
+  <!-- ============================================================ -->
+  <!-- NAVIGATION — Floating Glass Pill                              -->
+  <!-- ============================================================ -->
+  <nav class="fixed top-4 left-1/2 -translate-x-1/2 z-40 w-max">
+    <div class="flex items-center gap-8 px-8 py-3 rounded-full backdrop-blur-xl bg-white/[0.04] border border-white/[0.08] shadow-[0_8px_32px_rgba(0,0,0,0.4)]">
+      <a href="#" class="font-display text-lg font-bold tracking-[0.15em] text-accent hover:text-accent-light">
+        H'<span class="text-white">AESTHETIC</span>
+      </a>
+      <div class="hidden md:flex items-center gap-6 text-sm text-white/50">
+        <a href="#problem" class="hover:text-white">고민</a>
+        <a href="#services" class="hover:text-white">관리</a>
+        <a href="#reviews" class="hover:text-white">후기</a>
+      </div>
+      <a href="#cta" class="flex items-center gap-2 pl-5 pr-1.5 py-1.5 rounded-full bg-accent text-white text-sm font-medium hover:bg-accent-light hover:scale-[1.02] active:scale-[0.98]">
+        상담 예약
+        <span class="w-7 h-7 rounded-full bg-black/20 flex items-center justify-center">
+          <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+        </span>
+      </a>
+    </div>
+  </nav>
+
+  <!-- ============================================================ -->
+  <!-- HERO — Autoplay Video Background                              -->
+  <!-- ============================================================ -->
+  <!-- Desktop: video as full background with overlaid text -->
+  <!-- Mobile: video on top, text below (stacked) -->
+  <section class="relative overflow-hidden">
+
+    <!-- === MOBILE LAYOUT (stacked: video top + text bottom) === -->
+    <div class="md:hidden flex flex-col pt-20">
+      <!-- Video area -->
+      <div class="relative w-full aspect-video">
+        <video
+          class="w-full h-full object-contain"
+          src="hero-video.mp4"
+          muted
+          autoplay
+          loop
+          playsinline
+          preload="auto"
+        ></video>
+        <div class="absolute inset-0 bg-gradient-to-b from-dark-950/30 via-transparent to-dark-950"></div>
+      </div>
+
+      <!-- Text area -->
+      <div class="relative px-5 pb-10 -mt-8 z-10">
+        <div id="heroBadgeMobile" class="mb-4 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+          <span class="inline-flex items-center gap-2 rounded-full px-3 py-1 text-[10px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20">
+            <iconify-icon icon="solar:star-bold" width="10"></iconify-icon>
+            Custom Skin Care
+          </span>
+        </div>
+
+        <h1 id="heroTitleMobile" class="text-3xl font-bold leading-tight tracking-tight mb-5 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+          당신의 피부엔,<br>
+          <span class="text-accent">교과서가 없습니다</span>
+        </h1>
+
+        <p id="heroDescMobile" class="text-sm text-white/60 leading-relaxed mb-7 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+          피부과에서 받은 처방, 유명 관리샵의 패키지&#8212;
+          그래도 매달 같은 자리에 올라오는 트러블.
+          <span class="text-white/90">H'AESTHETIC</span>은 첫 방문 때 제품을 바르지 않습니다.
+          먼저 당신의 피부가 지금 어떤 상태인지 들여다봅니다.
+        </p>
+
+        <div id="heroCtaMobile" class="flex flex-col gap-3 mb-8 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+          <a href="#cta" class="group flex items-center justify-center gap-3 pl-6 pr-2 py-3 rounded-full bg-accent text-white font-semibold text-sm shadow-[0_0_30px_rgba(232,101,36,0.2)]">
+            무료 피부 상담 예약하기
+            <span class="w-9 h-9 rounded-full bg-black/20 flex items-center justify-center">
+              <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
+            </span>
+          </a>
+          <a href="#services" class="flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-white/50 text-xs border border-white/10">
+            <iconify-icon icon="solar:play-circle-linear" width="16"></iconify-icon>
+            관리 과정 보기
+          </a>
+        </div>
+
+        <!-- Trust metrics -->
+        <div id="heroMetricsMobile" class="flex items-center justify-between transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+          <div class="text-center">
+            <div class="text-xl font-bold text-white tabular-nums">4.87<span class="text-accent text-sm">/5.0</span></div>
+            <div class="text-[10px] text-white/30 mt-0.5">고객 만족도</div>
+          </div>
+          <div class="w-px h-8 bg-white/10"></div>
+          <div class="text-center">
+            <div class="text-xl font-bold text-white tabular-nums">2,847<span class="text-accent text-sm">+</span></div>
+            <div class="text-[10px] text-white/30 mt-0.5">관리 건수</div>
+          </div>
+          <div class="w-px h-8 bg-white/10"></div>
+          <div class="text-center">
+            <div class="text-xl font-bold text-white tabular-nums">89<span class="text-accent text-sm">%</span></div>
+            <div class="text-[10px] text-white/30 mt-0.5">재방문율</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- === DESKTOP LAYOUT (video background + overlaid text) === -->
+    <div class="hidden md:flex min-h-[100dvh] items-center relative">
+      <!-- Video background -->
+      <video
+        class="absolute inset-0 w-full h-full object-cover opacity-60"
+        src="hero-video.mp4"
+        muted
+        autoplay
+        loop
+        playsinline
+        preload="auto"
+      ></video>
+
+      <!-- Dark overlay -->
+      <div class="absolute inset-0 bg-gradient-to-t from-dark-950 via-dark-950/60 to-dark-950/30"></div>
+
+      <!-- Mesh gradient accent -->
+      <div class="absolute inset-0 pointer-events-none">
+        <div class="absolute bottom-0 left-0 w-[600px] h-[400px] bg-accent/[0.05] rounded-full blur-[120px]"></div>
+      </div>
+
+      <!-- Content -->
+      <div class="relative z-10 max-w-7xl mx-auto px-6 lg:px-8 w-full">
+        <div class="max-w-3xl">
+          <div id="heroBadge" class="mb-6 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+            <span class="inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20 backdrop-blur-sm">
+              <iconify-icon icon="solar:star-bold" width="12"></iconify-icon>
+              Custom Skin Care
+            </span>
+          </div>
+
+          <h1 id="heroTitle" class="text-5xl lg:text-7xl font-bold leading-tight tracking-tight mb-8 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+            당신의 피부엔,<br>
+            <span class="text-accent">교과서가 없습니다</span>
+          </h1>
+
+          <p id="heroDesc" class="text-lg text-white/60 leading-relaxed max-w-[50ch] mb-10 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+            피부과에서 받은 처방, 유명 관리샵의 패키지&#8212;
+            그래도 매달 같은 자리에 올라오는 트러블.<br>
+            <span class="text-white/90">H'AESTHETIC</span>은 첫 방문 때 제품을 바르지 않습니다.
+            먼저 당신의 피부가 지금 어떤 상태인지 들여다봅니다.
+          </p>
+
+          <div id="heroCta" class="flex items-start gap-4 mb-10 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+            <a href="#cta" class="group flex items-center gap-3 pl-8 pr-2 py-3 rounded-full bg-accent text-white font-semibold text-base hover:bg-accent-light hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_40px_rgba(232,101,36,0.25)]">
+              무료 피부 상담 예약하기
+              <span class="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-500">
+                <iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon>
+              </span>
+            </a>
+            <a href="#services" class="flex items-center gap-2 px-6 py-3 rounded-full text-white/50 text-sm hover:text-white border border-white/10 hover:border-white/20 backdrop-blur-sm">
+              <iconify-icon icon="solar:play-circle-linear" width="18"></iconify-icon>
+              관리 과정 보기
+            </a>
+          </div>
+
+          <!-- Trust metrics -->
+          <div id="heroMetrics" class="flex items-center gap-8 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
+            <div>
+              <div class="text-2xl font-bold text-white tabular-nums">4.87<span class="text-accent text-lg">/5.0</span></div>
+              <div class="text-xs text-white/30 mt-0.5">고객 만족도</div>
+            </div>
+            <div class="w-px h-10 bg-white/10"></div>
+            <div>
+              <div class="text-2xl font-bold text-white tabular-nums">2,847<span class="text-accent text-lg">+</span></div>
+              <div class="text-xs text-white/30 mt-0.5">관리 건수</div>
+            </div>
+            <div class="w-px h-10 bg-white/10"></div>
+            <div>
+              <div class="text-2xl font-bold text-white tabular-nums">89<span class="text-accent text-lg">%</span></div>
+              <div class="text-xs text-white/30 mt-0.5">재방문율</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Scroll indicator -->
+      <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-white/30 text-xs tracking-widest uppercase">
+        <span>Scroll</span>
+        <div class="w-5 h-8 rounded-full border border-white/20 flex justify-center pt-1.5">
+          <div class="w-1 h-2 rounded-full bg-accent animate-bounce"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PROBLEM — Bento Grid                                          -->
+  <!-- ============================================================ -->
+  <section id="problem" class="relative py-24 md:py-32 lg:py-40">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-16 md:mb-24">
+        <span class="reveal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20 mb-6">
+          Problem
+        </span>
+        <h2 class="reveal text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+          이런 고민,<br><span class="text-accent">혼자 하고 계셨나요?</span>
+        </h2>
+      </div>
+
+      <!-- Bento Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-12 gap-4 md:gap-5 stagger">
+        <!-- Card 1: Large (spans 7) -->
+        <div class="reveal md:col-span-7">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-8 md:p-10 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col justify-between min-h-[280px]">
+              <div>
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center">
+                    <iconify-icon icon="solar:refresh-circle-bold" width="24" class="text-accent"></iconify-icon>
+                  </span>
+                  <span class="font-display text-5xl font-bold text-accent/20">01</span>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold leading-snug mb-4">
+                  피부과 다녀도 <span class="text-accent">3주면</span> 다시 올라온다
+                </h3>
+                <p class="text-sm md:text-base text-white/40 leading-relaxed max-w-[50ch]">
+                  여드름 치료를 받아도 평균 4.2회 반복 재발합니다.
+                  항생제와 연고로 잠재울 순 있지만, 피지, 모공, 각질의
+                  근본 원인을 해결하지 않으면 트러블은 같은 자리로 돌아옵니다.
+                </p>
+              </div>
+              <div class="mt-6 flex items-center gap-2 text-accent/60 text-xs">
+                <iconify-icon icon="solar:graph-down-linear" width="16"></iconify-icon>
+                평균 재발 주기 3주
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 2: Small (spans 5) -->
+        <div class="reveal md:col-span-5">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-8 md:p-10 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col justify-between min-h-[280px]">
+              <div>
+                <div class="flex items-center gap-3 mb-6">
+                  <span class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center">
+                    <iconify-icon icon="solar:copy-bold" width="24" class="text-accent"></iconify-icon>
+                  </span>
+                  <span class="font-display text-5xl font-bold text-accent/20">02</span>
+                </div>
+                <h3 class="text-xl md:text-2xl font-bold leading-snug mb-4">
+                  10만 원짜리 관리,<br><span class="text-accent">다 똑같은</span> 코스였다
+                </h3>
+                <p class="text-sm md:text-base text-white/40 leading-relaxed">
+                  클렌징, 팩, 마사지&#8212;어느 샵에 가도 달라지지 않는 루틴.
+                  내 피부가 지금 수분이 필요한지, 압출이 필요한지 물어보는 곳이 없었습니다.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 3: Full width accent -->
+        <div class="reveal md:col-span-12">
+          <div class="bg-accent/[0.08] ring-1 ring-accent/20 p-1.5 rounded-[1.5rem]">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-8 md:p-10 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+              <div class="flex flex-col md:flex-row md:items-center gap-6 md:gap-12">
+                <div class="flex items-center gap-3">
+                  <span class="w-12 h-12 rounded-2xl bg-accent/10 flex items-center justify-center">
+                    <iconify-icon icon="solar:question-circle-bold" width="24" class="text-accent"></iconify-icon>
+                  </span>
+                  <span class="font-display text-5xl font-bold text-accent/20">03</span>
+                </div>
+                <div class="flex-1">
+                  <h3 class="text-xl md:text-2xl font-bold leading-snug mb-3">
+                    뭘 먼저 해야 할지 <span class="text-accent">모르겠다</span>
+                  </h3>
+                  <p class="text-sm md:text-base text-white/40 leading-relaxed max-w-[65ch]">
+                    피부 고민은 여러 개인데, 어디서부터 시작해야 할지 결정하기 어렵습니다.
+                    잘못된 순서로 관리를 받으면 오히려 피부가 악화됩니다.
+                    그래서 H'AESTHETIC은 <span class="text-accent/80">상담이 먼저</span>입니다.
+                  </p>
+                </div>
+                <a href="#cta" class="flex items-center gap-2 pl-6 pr-2 py-2 rounded-full bg-accent/10 text-accent text-sm font-medium hover:bg-accent/20 whitespace-nowrap self-start md:self-center">
+                  상담 받아보기
+                  <span class="w-7 h-7 rounded-full bg-accent/20 flex items-center justify-center">
+                    <iconify-icon icon="solar:arrow-right-linear" width="14"></iconify-icon>
+                  </span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- SERVICES — Zig-Zag Alternating                                -->
+  <!-- ============================================================ -->
+  <section id="services" class="relative py-24 md:py-32 lg:py-40">
+    <!-- Background accent -->
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <!-- Section header -->
+      <div class="text-center mb-16 md:mb-24">
+        <span class="reveal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20 mb-6">
+          Services
+        </span>
+        <h2 class="reveal text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+          H'AESTHETIC의<br><span class="text-accent">3가지 핵심 관리</span>
+        </h2>
+        <p class="reveal text-base text-white/40 mt-6 max-w-[45ch] mx-auto leading-relaxed">
+          틀에 짜여진 교과서 같은 관리가 아닌,
+          당신의 피부에 맞는 관리를 설계합니다.
+        </p>
+      </div>
+
+      <!-- Service 1: Image Left, Text Right -->
+      <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center mb-20 md:mb-32">
+        <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem]">
+          <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+            <img
+              src="https://picsum.photos/seed/skin-planning/700/500"
+              alt="스킨플래닝 상담 과정"
+              class="w-full h-[300px] md:h-[400px] object-cover opacity-70"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+        </div>
+        <div class="space-y-6">
+          <span class="font-display text-xs tracking-[0.2em] uppercase text-accent/60">Service 01</span>
+          <h3 class="text-2xl md:text-4xl font-bold leading-snug">
+            스킨플래닝
+            <span class="block text-base md:text-lg text-white/30 font-normal mt-1 font-display">Skin Planning</span>
+          </h3>
+          <p class="text-base text-white/40 leading-relaxed max-w-[50ch]">
+            관리 전, 전문가가 피부 상태를 직접 분석합니다.
+            유분과 수분 밸런스, 모공 상태, 트러블 원인을
+            파악한 뒤 그날 가장 필요한 관리를 설계합니다.
+          </p>
+          <!-- Stat -->
+          <div class="flex items-center gap-4 pt-2">
+            <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1 rounded-2xl">
+              <div class="bg-dark-600 rounded-[calc(1rem-0.25rem)] px-6 py-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+                <div class="text-3xl font-bold text-accent tabular-nums">89%</div>
+                <div class="text-xs text-white/30 mt-1">기존 샵과 접근법이<br>달랐다고 응답</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 2: Text Left, Image Right (Zig-Zag) -->
+      <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center mb-20 md:mb-32">
+        <div class="space-y-6 md:order-1 order-2">
+          <span class="font-display text-xs tracking-[0.2em] uppercase text-accent/60">Service 02</span>
+          <h3 class="text-2xl md:text-4xl font-bold leading-snug">
+            여드름 · 문제성<br>피부 관리
+          </h3>
+          <p class="text-base text-white/40 leading-relaxed max-w-[50ch]">
+            염증성 여드름부터 막힌 모공, 반복되는 트러블까지.
+            단순 압출이 아닌, 피부 상태에 맞는 단계별 케어로
+            자극 없이 피부 장벽을 회복하면서 관리합니다.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1 rounded-2xl">
+              <div class="bg-dark-600 rounded-[calc(1rem-0.25rem)] px-5 py-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+                <div class="text-3xl font-bold text-accent tabular-nums">67%</div>
+                <div class="text-xs text-white/30 mt-1">3회 관리 후<br>트러블 빈도 감소</div>
+              </div>
+            </div>
+            <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1 rounded-2xl">
+              <div class="bg-dark-600 rounded-[calc(1rem-0.25rem)] px-5 py-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+                <div class="text-3xl font-bold text-accent tabular-nums">2일</div>
+                <div class="text-xs text-white/30 mt-1">압출 후 진정<br>회복 시간</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="md:order-2 order-1 bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem]">
+          <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+            <img
+              src="https://picsum.photos/seed/acne-care/700/500"
+              alt="여드름 문제성 피부 전문 관리"
+              class="w-full h-[300px] md:h-[400px] object-cover opacity-70"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+        </div>
+      </div>
+
+      <!-- Service 3: Image Left, Text Right -->
+      <div class="reveal grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-16 items-center">
+        <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem]">
+          <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] overflow-hidden shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+            <img
+              src="https://picsum.photos/seed/lifting-care/700/500"
+              alt="리프팅 탄력 관리"
+              class="w-full h-[300px] md:h-[400px] object-cover opacity-70"
+              loading="lazy"
+              decoding="async"
+            >
+          </div>
+        </div>
+        <div class="space-y-6">
+          <span class="font-display text-xs tracking-[0.2em] uppercase text-accent/60">Service 03</span>
+          <h3 class="text-2xl md:text-4xl font-bold leading-snug">
+            리프팅 · 탄력 관리
+          </h3>
+          <p class="text-base text-white/40 leading-relaxed max-w-[50ch]">
+            처지기 시작한 피부, 볼륨 손실, 나솔라비알 주름.
+            시술 없이 피부 본연의 탄력을 되살리는 집중 관리입니다.
+            꾸준한 케어로 리프팅 라인을 유지합니다.
+          </p>
+          <div class="flex items-center gap-3 pt-2">
+            <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1 rounded-2xl">
+              <div class="bg-dark-600 rounded-[calc(1rem-0.25rem)] px-5 py-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+                <div class="text-3xl font-bold text-accent tabular-nums">4.9/5.0</div>
+                <div class="text-xs text-white/30 mt-1">4회 집중 관리 후<br>고객 만족도</div>
+              </div>
+            </div>
+            <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1 rounded-2xl">
+              <div class="bg-dark-600 rounded-[calc(1rem-0.25rem)] px-5 py-4 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+                <div class="text-3xl font-bold text-accent tabular-nums">3&#8211;4주</div>
+                <div class="text-xs text-white/30 mt-1">리프팅 효과<br>평균 지속 기간</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- TESTIMONIALS — Masonry Grid                                   -->
+  <!-- ============================================================ -->
+  <section id="reviews" class="relative py-24 md:py-32 lg:py-40">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 md:mb-24">
+        <span class="reveal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20 mb-6">
+          Testimonials
+        </span>
+        <h2 class="reveal text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+          실제 <span class="text-accent">고객 이야기</span>
+        </h2>
+      </div>
+
+      <!-- Masonry-style testimonial grid -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 stagger">
+        <!-- Testimonial 1 (tall) -->
+        <div class="reveal md:row-span-2">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col justify-between">
+              <div>
+                <div class="flex gap-1 mb-5">
+                  <iconify-icon icon="solar:star-bold" width="16" class="text-accent"></iconify-icon>
+                  <iconify-icon icon="solar:star-bold" width="16" class="text-accent"></iconify-icon>
+                  <iconify-icon icon="solar:star-bold" width="16" class="text-accent"></iconify-icon>
+                  <iconify-icon icon="solar:star-bold" width="16" class="text-accent"></iconify-icon>
+                  <iconify-icon icon="solar:star-bold" width="16" class="text-accent"></iconify-icon>
+                </div>
+                <p class="text-lg font-semibold leading-snug mb-4 text-white/90">
+                  "턱선에 3년 만에 트러블이 없어졌어요"
+                </p>
+                <p class="text-sm text-white/40 leading-relaxed">
+                  피부과를 1년 넘게 다녔는데 항생제를 끊으면 재발했어요.
+                  H'AESTHETIC에서 압출 후 진정 관리를 3회 받았더니
+                  턱선 쪽 낭종성 여드름이 처음으로 2주 이상 안 올라왔습니다.
+                  지금은 한 달에 한 번 관리하면서 유지 중이에요.
+                </p>
+              </div>
+              <div class="flex items-center gap-3 mt-6 pt-6 border-t border-white/[0.06]">
+                <img src="https://i.pravatar.cc/150?u=jisoo-kim" alt="김지수" class="w-10 h-10 rounded-full" loading="lazy" decoding="async">
+                <div>
+                  <div class="text-sm font-semibold">김지수</div>
+                  <div class="text-xs text-white/30">27세 · 뷰티 유튜버</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 2 -->
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem]">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+              <div class="flex gap-1 mb-4">
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+              </div>
+              <p class="text-base font-semibold leading-snug mb-3 text-white/90">
+                "'수분팩은 오히려 독'이라는 말이 충격이었어요"
+              </p>
+              <p class="text-sm text-white/40 leading-relaxed">
+                건조한 줄 알고 수분 크림을 잔뜩 발랐는데,
+                피지 과잉 피부라고 하시더라고요. 4회 후에 모공이 눈에 띄게 작아졌습니다.
+              </p>
+              <div class="flex items-center gap-3 mt-5 pt-5 border-t border-white/[0.06]">
+                <img src="https://i.pravatar.cc/150?u=hyuna-park" alt="박현아" class="w-9 h-9 rounded-full" loading="lazy" decoding="async">
+                <div>
+                  <div class="text-sm font-semibold">박현아</div>
+                  <div class="text-xs text-white/30">34세 · 마케터</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 3 -->
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem]">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+              <div class="flex gap-1 mb-4">
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+              </div>
+              <p class="text-base font-semibold leading-snug mb-3 text-white/90">
+                "남자인데 전혀 어색하지 않았어요"
+              </p>
+              <p class="text-sm text-white/40 leading-relaxed">
+                상담부터 편안하게 해주셨고, 2회 후부터
+                코 주변 블랙헤드가 눈에 띄게 줄었습니다.
+              </p>
+              <div class="flex items-center gap-3 mt-5 pt-5 border-t border-white/[0.06]">
+                <img src="https://i.pravatar.cc/150?u=junhyuk-choi" alt="최준혁" class="w-9 h-9 rounded-full" loading="lazy" decoding="async">
+                <div>
+                  <div class="text-sm font-semibold">최준혁</div>
+                  <div class="text-xs text-white/30">29세 · 개발자</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 4 -->
+        <div class="reveal">
+          <div class="bg-accent/[0.06] ring-1 ring-accent/20 p-1.5 rounded-[1.5rem]">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+              <div class="flex gap-1 mb-4">
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+              </div>
+              <p class="text-base font-semibold leading-snug mb-3 text-white/90">
+                "리프팅 시술 고민했는데, 여기 와보길 잘했어요"
+              </p>
+              <p class="text-sm text-white/40 leading-relaxed">
+                4회 관리를 먼저 받았는데, 얼굴이 훨씬 가볍고 탄탄해진 느낌이에요.
+                시술 결정은 조금 더 미루기로 했습니다.
+              </p>
+              <div class="flex items-center gap-3 mt-5 pt-5 border-t border-white/[0.06]">
+                <img src="https://i.pravatar.cc/150?u=mikyung-lee" alt="이미경" class="w-9 h-9 rounded-full" loading="lazy" decoding="async">
+                <div>
+                  <div class="text-sm font-semibold">이미경</div>
+                  <div class="text-xs text-white/30">42세 · 프리랜서 디자이너</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Testimonial 5 -->
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem]">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)]">
+              <div class="flex gap-1 mb-4">
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+                <iconify-icon icon="solar:star-bold" width="14" class="text-accent"></iconify-icon>
+              </div>
+              <p class="text-base font-semibold leading-snug mb-3 text-white/90">
+                "처음 온 날, 관리 전에 20분을 대화했어요"
+              </p>
+              <p class="text-sm text-white/40 leading-relaxed">
+                생활 패턴, 스트레스 빈도, 수면 시간까지 물어보셨어요.
+                원인을 찾으려는 게 느껴졌어요.
+                3회 관리 후 반복 트러블이 월 2회 이하로 줄었습니다.
+              </p>
+              <div class="flex items-center gap-3 mt-5 pt-5 border-t border-white/[0.06]">
+                <img src="https://i.pravatar.cc/150?u=daeun-jung" alt="정다은" class="w-9 h-9 rounded-full" loading="lazy" decoding="async">
+                <div>
+                  <div class="text-sm font-semibold">정다은</div>
+                  <div class="text-xs text-white/30">31세 · 간호사</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- CTA — Full-Bleed Conversion                                  -->
+  <!-- ============================================================ -->
+  <section id="cta" class="relative py-24 md:py-40 overflow-hidden">
+    <!-- Background mesh -->
+    <div class="absolute inset-0">
+      <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-accent/[0.06] rounded-full blur-[150px]" style="animation: gradientRotate 25s linear infinite;"></div>
+    </div>
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+    <div class="relative max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <span class="reveal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20 mb-8">
+        Reservation
+      </span>
+
+      <h2 class="reveal text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight mb-8">
+        지금, 당신의 피부 이야기를<br><span class="text-accent">들려주세요</span>
+      </h2>
+
+      <p class="reveal text-base md:text-lg text-white/40 leading-relaxed max-w-[45ch] mx-auto mb-10">
+        피부 관리는 '좋다는 곳'이 아니라
+        '나에게 맞는 곳'이 따로 있습니다.<br><br>
+        어떤 관리가 필요한지 모르셔도 됩니다.
+        먼저 와서 이야기해주세요.
+      </p>
+
+      <div class="reveal">
+        <a href="#" class="group inline-flex items-center gap-3 pl-10 pr-3 py-4 rounded-full bg-accent text-white font-bold text-lg hover:bg-accent-light hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_60px_rgba(232,101,36,0.25)]">
+          지금 상담 예약하기
+          <span class="w-12 h-12 rounded-full bg-black/20 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-500">
+            <iconify-icon icon="solar:arrow-right-linear" width="20"></iconify-icon>
+          </span>
+        </a>
+      </div>
+
+      <div class="reveal flex items-center justify-center gap-6 mt-10 text-sm text-white/30">
+        <span class="flex items-center gap-2">
+          <iconify-icon icon="solar:calendar-linear" width="16" class="text-accent/50"></iconify-icon>
+          예약 후 방문
+        </span>
+        <span class="w-1 h-1 rounded-full bg-white/20"></span>
+        <span class="flex items-center gap-2">
+          <iconify-icon icon="solar:clock-circle-linear" width="16" class="text-accent/50"></iconify-icon>
+          당일 예약 가능
+        </span>
+        <span class="w-1 h-1 rounded-full bg-white/20"></span>
+        <span class="flex items-center gap-2">
+          <iconify-icon icon="solar:shield-check-linear" width="16" class="text-accent/50"></iconify-icon>
+          1:1 프라이빗 상담
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- FOOTER — Minimal                                              -->
+  <!-- ============================================================ -->
+  <footer class="border-t border-white/[0.06] py-10">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+        <div class="flex items-center gap-4">
+          <span class="font-display text-lg font-bold tracking-[0.12em] text-accent">H'<span class="text-white">AESTHETIC</span></span>
+          <span class="text-xs text-white/20">|</span>
+          <span class="text-xs text-white/30">Custom Skin Care</span>
+        </div>
+        <div class="flex items-center gap-6 text-xs text-white/30">
+          <span>틀에 맞추지 않는 피부관리</span>
+          <span class="text-white/10">|</span>
+          <a href="#" class="hover:text-white">
+            <iconify-icon icon="solar:chat-round-dots-linear" width="18"></iconify-icon>
+          </a>
+          <a href="#" class="hover:text-white">
+            <iconify-icon icon="solar:phone-linear" width="18"></iconify-icon>
+          </a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ============================================================ -->
+  <!-- SCROLL ANIMATION SCRIPT                                       -->
+  <!-- ============================================================ -->
+  <script>
+    // === General reveal observer ===
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('active');
+        }
+      });
+    }, {
+      threshold: 0.1,
+      rootMargin: '0px 0px -50px 0px'
+    });
+
+    document.querySelectorAll('.reveal').forEach((el) => {
+      observer.observe(el);
+    });
+
+    // === Hero stagger reveal on load ===
+    (() => {
+      const ids = [
+        'heroBadge','heroTitle','heroDesc','heroCta','heroMetrics',
+        'heroBadgeMobile','heroTitleMobile','heroDescMobile','heroCtaMobile','heroMetricsMobile'
+      ];
+      setTimeout(() => {
+        ids.forEach((id, i) => {
+          const el = document.getElementById(id);
+          if (!el) return;
+          setTimeout(() => {
+            el.style.opacity = '1';
+            el.style.transform = 'translateY(0)';
+          }, 200 + i * 150);
+        });
+      }, 300);
+    })();
+  </script>
+
+</body>
+</html>
