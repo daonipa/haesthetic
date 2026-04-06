@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>H'AESTHETIC — 상담 문의 관리</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['Pretendard', 'system-ui', 'sans-serif'] },
+          colors: {
+            accent: '#E86524',
+            'accent-light': '#FF8042',
+            dark: { 950: '#050505', 900: '#0a0a0a', 800: '#131314', 700: '#1a1a1b', 600: '#222224' },
+          },
+        },
+      },
+    }
+  </script>
+  <style>
+    * { word-break: keep-all; }
+    select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24'%3E%3Cpath fill='%23888' d='m12 15.4l-6-6L7.4 8l4.6 4.6L16.6 8L18 9.4z'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 12px center; }
+  </style>
+</head>
+<body class="bg-dark-950 text-white min-h-screen font-sans">
+
+  <!-- Login Screen -->
+  <div id="loginScreen" class="min-h-screen flex items-center justify-center px-4">
+    <div class="w-full max-w-sm">
+      <div class="text-center mb-8">
+        <h1 class="text-2xl font-bold mb-2">H'<span class="text-accent">AESTHETIC</span></h1>
+        <p class="text-sm text-white/40">상담 문의 관리 페이지</p>
+      </div>
+      <form id="loginForm" class="space-y-4">
+        <input type="password" id="adminPassword" placeholder="관리자 비밀번호"
+          class="w-full px-4 py-3 rounded-xl bg-dark-700 ring-1 ring-white/[0.08] text-white placeholder-white/30 focus:outline-none focus:ring-2 focus:ring-accent/50 text-sm">
+        <button type="submit"
+          class="w-full py-3 rounded-xl bg-accent text-white font-semibold text-sm hover:bg-accent-light transition">
+          로그인
+        </button>
+        <p id="loginError" class="hidden text-xs text-red-400 text-center">비밀번호가 올바르지 않습니다.</p>
+      </form>
+    </div>
+  </div>
+
+  <!-- Admin Dashboard -->
+  <div id="adminDashboard" class="hidden">
+    <!-- Header -->
+    <header class="sticky top-0 z-50 bg-dark-950/80 backdrop-blur-xl border-b border-white/[0.06]">
+      <div class="max-w-6xl mx-auto px-4 py-4 flex items-center justify-between">
+        <div class="flex items-center gap-3">
+          <h1 class="text-lg font-bold">H'<span class="text-accent">AESTHETIC</span></h1>
+          <span class="text-xs text-white/30">|</span>
+          <span class="text-sm text-white/50">상담 문의 관리</span>
+        </div>
+        <div class="flex items-center gap-4">
+          <button onclick="loadInquiries()" class="px-3 py-1.5 rounded-lg bg-white/[0.05] ring-1 ring-white/[0.08] text-xs text-white/60 hover:text-white transition">
+            새로고침
+          </button>
+          <button onclick="logout()" class="px-3 py-1.5 rounded-lg text-xs text-white/30 hover:text-white transition">
+            로그아웃
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <!-- Stats -->
+    <div class="max-w-6xl mx-auto px-4 py-6">
+      <div class="grid grid-cols-3 gap-4 mb-6">
+        <div class="bg-dark-800 ring-1 ring-white/[0.06] rounded-xl p-4 text-center">
+          <div class="text-2xl font-bold text-accent" id="statNew">0</div>
+          <div class="text-xs text-white/30 mt-1">신규</div>
+        </div>
+        <div class="bg-dark-800 ring-1 ring-white/[0.06] rounded-xl p-4 text-center">
+          <div class="text-2xl font-bold text-yellow-400" id="statConfirmed">0</div>
+          <div class="text-xs text-white/30 mt-1">확인</div>
+        </div>
+        <div class="bg-dark-800 ring-1 ring-white/[0.06] rounded-xl p-4 text-center">
+          <div class="text-2xl font-bold text-green-400" id="statDone">0</div>
+          <div class="text-xs text-white/30 mt-1">완료</div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="bg-dark-800 ring-1 ring-white/[0.06] rounded-2xl overflow-hidden">
+        <div class="overflow-x-auto">
+          <table class="w-full text-sm">
+            <thead>
+              <tr class="border-b border-white/[0.06] text-white/40 text-xs uppercase tracking-wider">
+                <th class="text-left px-5 py-4">접수일시</th>
+                <th class="text-left px-5 py-4">이름</th>
+                <th class="text-left px-5 py-4">전화번호</th>
+                <th class="text-left px-5 py-4">상담분야</th>
+                <th class="text-left px-5 py-4">상태</th>
+                <th class="text-left px-5 py-4">메모</th>
+              </tr>
+            </thead>
+            <tbody id="inquiryTable" class="divide-y divide-white/[0.04]">
+              <tr><td colspan="6" class="px-5 py-12 text-center text-white/20">로딩 중...</td></tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Supabase SDK -->
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
+  <script>
+    const SUPABASE_URL = 'https://soklgkoysbmdbddtnnlj.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNva2xna295c2JtZGJkZHRubmxqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NDg4MjIsImV4cCI6MjA4NzEyNDgyMn0.-yqc9JqYTeHmDMZ8u7Mrc8M5hmhHpk6oF3Qduv-_hkI';
+    const sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
+
+    const ADMIN_PW = 'haesthetic2026';
+
+    // Login
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      const pw = document.getElementById('adminPassword').value;
+      if (pw === ADMIN_PW) {
+        sessionStorage.setItem('ha_admin', '1');
+        showDashboard();
+      } else {
+        document.getElementById('loginError').classList.remove('hidden');
+      }
+    });
+
+    // Check session
+    if (sessionStorage.getItem('ha_admin') === '1') showDashboard();
+
+    function showDashboard() {
+      document.getElementById('loginScreen').classList.add('hidden');
+      document.getElementById('adminDashboard').classList.remove('hidden');
+      loadInquiries();
+    }
+
+    function logout() {
+      sessionStorage.removeItem('ha_admin');
+      location.reload();
+    }
+
+    async function loadInquiries() {
+      const { data, error } = await sb
+        .from('haesthetic_inquiries')
+        .select('*')
+        .order('created_at', { ascending: false });
+
+      if (error) {
+        document.getElementById('inquiryTable').innerHTML =
+          '<tr><td colspan="6" class="px-5 py-12 text-center text-red-400">데이터를 불러올 수 없습니다.</td></tr>';
+        return;
+      }
+
+      // Stats
+      const newCount = data.filter(d => d.status === '신규').length;
+      const confirmedCount = data.filter(d => d.status === '확인').length;
+      const doneCount = data.filter(d => d.status === '완료').length;
+      document.getElementById('statNew').textContent = newCount;
+      document.getElementById('statConfirmed').textContent = confirmedCount;
+      document.getElementById('statDone').textContent = doneCount;
+
+      if (data.length === 0) {
+        document.getElementById('inquiryTable').innerHTML =
+          '<tr><td colspan="6" class="px-5 py-12 text-center text-white/20">접수된 문의가 없습니다.</td></tr>';
+        return;
+      }
+
+      document.getElementById('inquiryTable').innerHTML = data.map(row => {
+        const date = new Date(row.created_at);
+        const dateStr = date.toLocaleDateString('ko-KR', { month: '2-digit', day: '2-digit' })
+          + ' ' + date.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+
+        const statusColors = {
+          '신규': 'bg-accent/20 text-accent',
+          '확인': 'bg-yellow-500/20 text-yellow-400',
+          '완료': 'bg-green-500/20 text-green-400',
+        };
+        const statusClass = statusColors[row.status] || statusColors['신규'];
+
+        return '<tr class="hover:bg-white/[0.02] transition">' +
+          '<td class="px-5 py-4 text-white/40 text-xs whitespace-nowrap">' + dateStr + '</td>' +
+          '<td class="px-5 py-4 font-medium">' + escapeHtml(row.name) + '</td>' +
+          '<td class="px-5 py-4 text-white/60">' + escapeHtml(row.phone) + '</td>' +
+          '<td class="px-5 py-4 text-white/60 text-xs">' + escapeHtml(row.service_type) + '</td>' +
+          '<td class="px-5 py-4">' +
+            '<select onchange="updateStatus(' + row.id + ', this.value)" ' +
+              'class="px-2 py-1 rounded-lg text-xs font-medium ' + statusClass + ' bg-dark-700 ring-1 ring-white/[0.08] cursor-pointer appearance-none pr-6 focus:outline-none">' +
+              '<option value="신규"' + (row.status === '신규' ? ' selected' : '') + '>신규</option>' +
+              '<option value="확인"' + (row.status === '확인' ? ' selected' : '') + '>확인</option>' +
+              '<option value="완료"' + (row.status === '완료' ? ' selected' : '') + '>완료</option>' +
+            '</select>' +
+          '</td>' +
+          '<td class="px-5 py-4">' +
+            '<input type="text" value="' + escapeHtml(row.memo || '') + '" placeholder="메모 입력..." ' +
+              'onblur="updateMemo(' + row.id + ', this.value)" ' +
+              'class="w-full min-w-[120px] px-2 py-1 rounded-lg bg-transparent ring-1 ring-white/[0.06] text-xs text-white/50 placeholder-white/20 focus:outline-none focus:ring-accent/30">' +
+          '</td>' +
+        '</tr>';
+      }).join('');
+    }
+
+    async function updateStatus(id, status) {
+      await sb.from('haesthetic_inquiries').update({ status }).eq('id', id);
+      loadInquiries();
+    }
+
+    async function updateMemo(id, memo) {
+      await sb.from('haesthetic_inquiries').update({ memo }).eq('id', id);
+    }
+
+    function escapeHtml(str) {
+      const div = document.createElement('div');
+      div.textContent = str;
+      return div.innerHTML;
+    }
+  </script>
+</body>
+</html>
