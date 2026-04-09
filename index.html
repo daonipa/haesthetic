@@ -891,26 +891,58 @@
   </script>
 
   <!-- ============================================================ -->
-  <!-- FOOTER — Minimal                                              -->
+  <!-- FOOTER                                                        -->
   <!-- ============================================================ -->
-  <footer class="border-t border-white/[0.06] py-10">
+  <footer class="border-t border-white/[0.06] py-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div class="flex flex-col md:flex-row items-center justify-between gap-6">
+      <!-- Top: Brand + Quick Contact -->
+      <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-white/[0.06]">
         <div class="flex items-center gap-4">
           <span class="font-display text-lg font-bold tracking-[0.12em] text-accent">H'<span class="text-white">AESTHETIC</span></span>
           <span class="text-xs text-white/20">|</span>
           <span class="text-xs text-white/30">Custom Skin Care</span>
         </div>
-        <div class="flex items-center gap-6 text-xs text-white/30">
+        <div class="flex items-center gap-6 text-xs text-white/40">
           <span>틀에 맞추지 않는 피부관리</span>
           <span class="text-white/10">|</span>
-          <a href="#" class="hover:text-white">
-            <iconify-icon icon="solar:chat-round-dots-linear" width="18"></iconify-icon>
+          <a href="http://pf.kakao.com/_PuLxej" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-white transition" aria-label="카카오톡 채널">
+            <iconify-icon icon="ri:kakao-talk-fill" width="18"></iconify-icon>
+            <span class="hidden sm:inline">카카오톡 채널</span>
           </a>
-          <a href="#" class="hover:text-white">
+          <a href="tel:01054120623" class="flex items-center gap-1.5 hover:text-white transition" aria-label="전화">
             <iconify-icon icon="solar:phone-linear" width="18"></iconify-icon>
+            <span class="hidden sm:inline">010-5412-0623</span>
           </a>
         </div>
+      </div>
+
+      <!-- Business Info -->
+      <div class="pt-8 grid grid-cols-1 md:grid-cols-2 gap-x-12 gap-y-3 text-xs text-white/50 leading-relaxed">
+        <div class="flex gap-2">
+          <span class="text-white/30 shrink-0 w-16">대표자</span>
+          <span>이다해</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-white/30 shrink-0 w-16">사업자번호</span>
+          <span>322-50-00322</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-white/30 shrink-0 w-16">주소</span>
+          <span>대구광역시 중구 동덕로8길 42, 2층</span>
+        </div>
+        <div class="flex gap-2">
+          <span class="text-white/30 shrink-0 w-16">연락처</span>
+          <a href="tel:01054120623" class="hover:text-white transition">010-5412-0623</a>
+        </div>
+        <div class="flex gap-2 md:col-span-2">
+          <span class="text-white/30 shrink-0 w-16">카카오톡</span>
+          <a href="http://pf.kakao.com/_PuLxej" target="_blank" rel="noopener" class="hover:text-white transition break-all">http://pf.kakao.com/_PuLxej</a>
+        </div>
+      </div>
+
+      <!-- Copyright -->
+      <div class="mt-8 pt-6 border-t border-white/[0.04] text-center text-[11px] text-white/25">
+        © 2026 H'AESTHETIC. All rights reserved.
       </div>
     </div>
   </footer>
