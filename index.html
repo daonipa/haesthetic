@@ -14,6 +14,26 @@
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:image" content="https://haesthetic.vercel.app/images/elasticity-contour-care.png">
+  <!-- Structured Data (Local SEO) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BeautySalon",
+    "name": "H'AESTHETIC",
+    "description": "맞춤형 피부관리 전문 에스테틱. 문제성피부 트러블케어, 웨딩 스킨케어, 탄력·윤곽 작은얼굴케어.",
+    "url": "https://haesthetic.vercel.app",
+    "telephone": "+82-10-5412-0623",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "동덕로8길 42, 2층",
+      "addressLocality": "중구",
+      "addressRegion": "대구광역시",
+      "addressCountry": "KR"
+    },
+    "image": "https://haesthetic.vercel.app/images/elasticity-contour-care.png",
+    "priceRange": "₩₩"
+  }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.min.css">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -130,8 +150,11 @@
       </a>
       <div class="hidden md:flex items-center gap-6 text-sm text-white/50">
         <a href="#problem" class="hover:text-white">고민</a>
+        <a href="#process" class="hover:text-white">과정</a>
         <a href="#services" class="hover:text-white">관리</a>
         <a href="#reviews" class="hover:text-white">후기</a>
+        <a href="#faq" class="hover:text-white">FAQ</a>
+        <a href="#location" class="hover:text-white">오시는 길</a>
       </div>
       <a href="#cta" class="flex items-center gap-2 pl-5 pr-1.5 py-1.5 rounded-full bg-accent text-white text-sm font-medium hover:bg-accent-light hover:scale-[1.02] active:scale-[0.98]">
         상담 예약
@@ -187,13 +210,13 @@
         </p>
 
         <div id="heroCtaMobile" class="flex flex-col gap-3 mb-8 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
-          <a href="#cta" class="group flex items-center justify-center gap-3 pl-6 pr-2 py-3 rounded-full bg-accent text-white font-semibold text-sm shadow-[0_0_30px_rgba(232,101,36,0.2)]">
+          <a href="#" target="_blank" rel="noopener" class="js-naver-booking group flex items-center justify-center gap-3 pl-6 pr-2 py-3 rounded-full bg-accent text-white font-semibold text-sm shadow-[0_0_30px_rgba(232,101,36,0.2)]">
             무료 피부 상담 예약하기
             <span class="w-9 h-9 rounded-full bg-black/20 flex items-center justify-center">
               <iconify-icon icon="solar:arrow-right-linear" width="16"></iconify-icon>
             </span>
           </a>
-          <a href="#services" class="flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-white/50 text-xs border border-white/10">
+          <a href="#process" class="flex items-center justify-center gap-2 px-5 py-2.5 rounded-full text-white/50 text-xs border border-white/10">
             <iconify-icon icon="solar:play-circle-linear" width="16"></iconify-icon>
             관리 과정 보기
           </a>
@@ -263,13 +286,13 @@
           </p>
 
           <div id="heroCta" class="flex items-start gap-4 mb-10 transition-all duration-700" style="opacity:0; transform: translateY(2rem);">
-            <a href="#cta" class="group flex items-center gap-3 pl-8 pr-2 py-3 rounded-full bg-accent text-white font-semibold text-base hover:bg-accent-light hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_40px_rgba(232,101,36,0.25)]">
+            <a href="#" target="_blank" rel="noopener" class="js-naver-booking group flex items-center gap-3 pl-8 pr-2 py-3 rounded-full bg-accent text-white font-semibold text-base hover:bg-accent-light hover:scale-[1.02] active:scale-[0.98] shadow-[0_0_40px_rgba(232,101,36,0.25)]">
               무료 피부 상담 예약하기
               <span class="w-10 h-10 rounded-full bg-black/20 flex items-center justify-center group-hover:translate-x-1 transition-transform duration-500">
                 <iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon>
               </span>
             </a>
-            <a href="#services" class="flex items-center gap-2 px-6 py-3 rounded-full text-white/50 text-sm hover:text-white border border-white/10 hover:border-white/20 backdrop-blur-sm">
+            <a href="#process" class="flex items-center gap-2 px-6 py-3 rounded-full text-white/50 text-sm hover:text-white border border-white/10 hover:border-white/20 backdrop-blur-sm">
               <iconify-icon icon="solar:play-circle-linear" width="18"></iconify-icon>
               관리 과정 보기
             </a>
@@ -401,6 +424,106 @@
                   </span>
                 </a>
               </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- PROCESS — 4-Step Skin Planning                                -->
+  <!-- ============================================================ -->
+  <section id="process" class="relative py-24 md:py-32 lg:py-40">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 md:mb-24">
+        <span class="reveal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20 mb-6">
+          Process
+        </span>
+        <h2 class="reveal text-3xl md:text-5xl lg:text-6xl font-bold leading-tight tracking-tight">
+          관리보다 <span class="text-accent">분석이 먼저</span>입니다
+        </h2>
+        <p class="reveal text-base text-white/40 mt-6 max-w-[45ch] mx-auto leading-relaxed">
+          H'AESTHETIC의 모든 관리는 이 4단계를 거칩니다.
+          첫 방문 때 제품부터 바르지 않는 이유입니다.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-5 stagger">
+        <!-- Step 1 -->
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col min-h-[240px]">
+              <div class="flex items-center justify-between mb-6">
+                <span class="w-11 h-11 rounded-2xl bg-accent/10 flex items-center justify-center">
+                  <iconify-icon icon="solar:chat-round-dots-bold" width="22" class="text-accent"></iconify-icon>
+                </span>
+                <span class="font-display text-4xl font-bold text-accent/20">01</span>
+              </div>
+              <h3 class="text-lg font-bold mb-3">사전 상담</h3>
+              <p class="text-sm text-white/40 leading-relaxed">
+                생활 패턴, 수면, 스트레스, 피부 이력까지.
+                피부 겉만 보지 않고 원인부터 함께 찾습니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 2 -->
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col min-h-[240px]">
+              <div class="flex items-center justify-between mb-6">
+                <span class="w-11 h-11 rounded-2xl bg-accent/10 flex items-center justify-center">
+                  <iconify-icon icon="solar:magnifer-zoom-in-bold" width="22" class="text-accent"></iconify-icon>
+                </span>
+                <span class="font-display text-4xl font-bold text-accent/20">02</span>
+              </div>
+              <h3 class="text-lg font-bold mb-3">피부 분석</h3>
+              <p class="text-sm text-white/40 leading-relaxed">
+                유분·수분 밸런스, 모공 상태, 트러블 원인을
+                전문가가 직접 확인합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 3 -->
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col min-h-[240px]">
+              <div class="flex items-center justify-between mb-6">
+                <span class="w-11 h-11 rounded-2xl bg-accent/10 flex items-center justify-center">
+                  <iconify-icon icon="solar:document-add-bold" width="22" class="text-accent"></iconify-icon>
+                </span>
+                <span class="font-display text-4xl font-bold text-accent/20">03</span>
+              </div>
+              <h3 class="text-lg font-bold mb-3">맞춤 관리 설계</h3>
+              <p class="text-sm text-white/40 leading-relaxed">
+                정해진 코스가 아니라, 그날 당신의 피부에
+                필요한 관리만 골라 설계합니다.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Step 4 -->
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] flex flex-col min-h-[240px]">
+              <div class="flex items-center justify-between mb-6">
+                <span class="w-11 h-11 rounded-2xl bg-accent/10 flex items-center justify-center">
+                  <iconify-icon icon="solar:home-smile-bold" width="22" class="text-accent"></iconify-icon>
+                </span>
+                <span class="font-display text-4xl font-bold text-accent/20">04</span>
+              </div>
+              <h3 class="text-lg font-bold mb-3">홈케어 가이드</h3>
+              <p class="text-sm text-white/40 leading-relaxed">
+                관리 후에도 유지되도록, 피부에 맞는
+                홈케어 방법과 관리 주기를 알려드립니다.
+              </p>
             </div>
           </div>
         </div>
@@ -752,6 +875,145 @@
   </section>
 
   <!-- ============================================================ -->
+  <!-- FAQ — Accordion                                               -->
+  <!-- ============================================================ -->
+  <section id="faq" class="relative py-24 md:py-32 lg:py-40">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 md:mb-20">
+        <span class="reveal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20 mb-6">
+          FAQ
+        </span>
+        <h2 class="reveal text-3xl md:text-5xl font-bold leading-tight tracking-tight">
+          자주 묻는 <span class="text-accent">질문</span>
+        </h2>
+      </div>
+
+      <div class="space-y-3 stagger">
+        <details class="reveal group bg-white/[0.03] ring-1 ring-white/[0.06] rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base font-semibold text-white/90">첫 방문 때는 어떤 걸 하나요?</span>
+            <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-accent shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-white/40 leading-relaxed">
+            첫 방문에서는 제품을 바로 바르지 않습니다. 생활 패턴과 피부 이력을 묻는 사전 상담,
+            그리고 유분·수분 밸런스와 트러블 원인을 확인하는 피부 분석이 먼저입니다.
+            분석 결과를 바탕으로 그날 필요한 관리를 함께 정합니다.
+          </div>
+        </details>
+
+        <details class="reveal group bg-white/[0.03] ring-1 ring-white/[0.06] rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base font-semibold text-white/90">예약은 어떻게 하나요?</span>
+            <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-accent shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-white/40 leading-relaxed">
+            네이버 예약으로 원하는 날짜와 시간을 바로 선택하실 수 있습니다.
+            당일 예약도 가능하며, 카카오톡 채널이나 전화(010-5412-0623)로도 문의하실 수 있습니다.
+            <a href="#" target="_blank" rel="noopener" class="js-naver-booking text-accent hover:text-accent-light underline underline-offset-2 ml-1">네이버 예약 바로가기</a>
+          </div>
+        </details>
+
+        <details class="reveal group bg-white/[0.03] ring-1 ring-white/[0.06] rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base font-semibold text-white/90">남성도 관리받을 수 있나요?</span>
+            <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-accent shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-white/40 leading-relaxed">
+            네, 남성 고객도 많이 찾아주십니다. 1:1 프라이빗 상담으로 진행되기 때문에
+            처음 오시는 분도 편안하게 관리받으실 수 있습니다.
+          </div>
+        </details>
+
+        <details class="reveal group bg-white/[0.03] ring-1 ring-white/[0.06] rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base font-semibold text-white/90">관리는 얼마나 자주 받아야 하나요?</span>
+            <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-accent shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-white/40 leading-relaxed">
+            피부 상태와 목표에 따라 다릅니다. 트러블 집중 케어는 초반에 짧은 주기로,
+            상태가 안정되면 월 1회 유지 관리로 이어가는 경우가 많습니다.
+            정확한 주기는 첫 상담에서 피부 분석 후 함께 설계합니다.
+          </div>
+        </details>
+
+        <details class="reveal group bg-white/[0.03] ring-1 ring-white/[0.06] rounded-2xl overflow-hidden">
+          <summary class="flex items-center justify-between gap-4 px-6 py-5 cursor-pointer list-none [&::-webkit-details-marker]:hidden">
+            <span class="text-base font-semibold text-white/90">웨딩 관리는 언제부터 시작하는 게 좋나요?</span>
+            <iconify-icon icon="solar:alt-arrow-down-linear" width="18" class="text-accent shrink-0 transition-transform duration-300 group-open:rotate-180"></iconify-icon>
+          </summary>
+          <div class="px-6 pb-6 text-sm text-white/40 leading-relaxed">
+            결혼식 90일 전(D-90)부터 시작하시길 권합니다. 피부 톤과 결, 수분 밸런스를
+            체계적인 스케줄로 끌어올려 웨딩 당일 최상의 컨디션을 만듭니다.
+            일정이 촉박하시더라도 상담 주시면 남은 기간에 맞춰 설계해 드립니다.
+          </div>
+        </details>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
+  <!-- LOCATION — 오시는 길                                          -->
+  <!-- ============================================================ -->
+  <section id="location" class="relative py-24 md:py-32">
+    <div class="absolute top-0 left-0 right-0 h-px bg-gradient-to-r from-transparent via-accent/20 to-transparent"></div>
+
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center mb-16 md:mb-20">
+        <span class="reveal inline-flex items-center gap-2 rounded-full px-4 py-1.5 text-[11px] uppercase tracking-[0.15em] font-medium bg-accent/10 text-accent border border-accent/20 mb-6">
+          Location
+        </span>
+        <h2 class="reveal text-3xl md:text-5xl font-bold leading-tight tracking-tight">
+          오시는 <span class="text-accent">길</span>
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-5 stagger max-w-4xl mx-auto">
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] text-center">
+              <span class="w-11 h-11 rounded-2xl bg-accent/10 inline-flex items-center justify-center mb-4">
+                <iconify-icon icon="solar:map-point-bold" width="22" class="text-accent"></iconify-icon>
+              </span>
+              <h3 class="text-base font-bold mb-2">주소</h3>
+              <p class="text-sm text-white/40 leading-relaxed">대구광역시 중구<br>동덕로8길 42, 2층</p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] text-center">
+              <span class="w-11 h-11 rounded-2xl bg-accent/10 inline-flex items-center justify-center mb-4">
+                <iconify-icon icon="solar:phone-bold" width="22" class="text-accent"></iconify-icon>
+              </span>
+              <h3 class="text-base font-bold mb-2">전화 문의</h3>
+              <p class="text-sm text-white/40 leading-relaxed">
+                <a href="tel:01054120623" class="hover:text-white transition">010-5412-0623</a><br>
+                예약제 운영 · 당일 예약 가능
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="reveal">
+          <div class="bg-white/[0.03] ring-1 ring-white/[0.06] p-1.5 rounded-[1.5rem] h-full">
+            <div class="bg-dark-700 rounded-[calc(1.5rem-0.375rem)] p-7 h-full shadow-[inset_0_1px_1px_rgba(255,255,255,0.06)] text-center">
+              <span class="w-11 h-11 rounded-2xl bg-accent/10 inline-flex items-center justify-center mb-4">
+                <iconify-icon icon="solar:calendar-bold" width="22" class="text-accent"></iconify-icon>
+              </span>
+              <h3 class="text-base font-bold mb-2">온라인 예약</h3>
+              <p class="text-sm text-white/40 leading-relaxed">
+                <a href="#" target="_blank" rel="noopener" class="js-naver-booking text-accent hover:text-accent-light transition">네이버 예약</a> ·
+                <a href="http://pf.kakao.com/_PuLxej" target="_blank" rel="noopener" class="hover:text-white transition">카카오톡 채널</a>
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============================================================ -->
   <!-- CTA — Full-Bleed Conversion                                  -->
   <!-- ============================================================ -->
   <section id="cta" class="relative py-24 md:py-40 overflow-hidden">
@@ -771,69 +1033,33 @@
         </h2>
         <p class="reveal text-base md:text-lg text-white/40 leading-relaxed max-w-[45ch] mx-auto">
           어떤 관리가 필요한지 모르셔도 됩니다.<br>
-          먼저 이야기해주세요. 맞춤 상담을 도와드립니다.
+          네이버 예약으로 편한 시간을 먼저 잡아주세요.
         </p>
       </div>
 
-      <!-- Consultation Form -->
-      <form id="consultForm" class="reveal space-y-5">
-        <div class="bg-white/[0.03] ring-1 ring-white/[0.06] rounded-2xl p-6 md:p-8 space-y-5">
-          <!-- Name -->
-          <div>
-            <label class="block text-sm font-medium text-white/60 mb-2">이름</label>
-            <input type="text" id="formName" required placeholder="홍길동"
-              class="w-full px-4 py-3 rounded-xl bg-dark-700 ring-1 ring-white/[0.08] text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-accent/50 transition text-sm">
-          </div>
-          <!-- Phone -->
-          <div>
-            <label class="block text-sm font-medium text-white/60 mb-2">전화번호</label>
-            <input type="tel" id="formPhone" required placeholder="010-0000-0000"
-              class="w-full px-4 py-3 rounded-xl bg-dark-700 ring-1 ring-white/[0.08] text-white placeholder-white/20 focus:outline-none focus:ring-2 focus:ring-accent/50 transition text-sm">
-          </div>
-          <!-- Service Type -->
-          <div>
-            <label class="block text-sm font-medium text-white/60 mb-2">상담 분야</label>
-            <select id="formService" required
-              class="w-full px-4 py-3 rounded-xl bg-dark-700 ring-1 ring-white/[0.08] text-white focus:outline-none focus:ring-2 focus:ring-accent/50 transition text-sm appearance-none cursor-pointer">
-              <option value="" disabled selected class="text-white/20">관심 분야를 선택해주세요</option>
-              <option value="문제성피부 트러블케어">문제성피부 트러블케어</option>
-              <option value="웨딩 스킨케어">웨딩 스킨케어</option>
-              <option value="탄력·윤곽 작은얼굴케어">탄력·윤곽 작은얼굴케어</option>
-              <option value="기타">기타 (방문 시 상담)</option>
-            </select>
-          </div>
-          <!-- Privacy Consent -->
-          <div class="pt-2">
-            <label class="flex items-start gap-3 cursor-pointer group">
-              <input type="checkbox" id="formPrivacy" required
-                class="mt-1 w-4 h-4 rounded border-white/20 bg-dark-700 text-accent focus:ring-accent/50 cursor-pointer accent-[#E86524]">
-              <span class="text-xs text-white/40 leading-relaxed">
-                <span class="text-white/60 font-medium">[필수] 개인정보 수집·이용에 동의합니다.</span>
-                <button type="button" onclick="document.getElementById('privacyDetail').classList.toggle('hidden')" class="ml-1 text-accent/60 hover:text-accent underline underline-offset-2">내용 보기</button>
-              </span>
-            </label>
-            <div id="privacyDetail" class="hidden mt-3 p-4 rounded-xl bg-dark-800 ring-1 ring-white/[0.06] text-xs text-white/30 leading-relaxed space-y-2">
-              <p><strong class="text-white/50">수집 항목:</strong> 이름, 전화번호, 상담 희망 분야</p>
-              <p><strong class="text-white/50">수집 목적:</strong> 피부 상담 예약 접수 및 안내 연락</p>
-              <p><strong class="text-white/50">보유 기간:</strong> 수집일로부터 1년 (목적 달성 후 즉시 파기)</p>
-              <p>동의를 거부하실 권리가 있으며, 거부 시 상담 예약이 제한됩니다.</p>
-            </div>
-          </div>
+      <!-- Booking Panel -->
+      <div class="reveal space-y-4">
+        <!-- Naver Booking (primary) -->
+        <a href="#" target="_blank" rel="noopener"
+          class="js-naver-booking group w-full py-4 rounded-full bg-[#03C75A] text-white font-bold text-base hover:brightness-110 hover:scale-[1.01] active:scale-[0.99] transition-all shadow-[0_0_40px_rgba(3,199,90,0.25)] flex items-center justify-center gap-2.5">
+          <span class="w-6 h-6 rounded-md bg-white text-[#03C75A] flex items-center justify-center font-display font-extrabold text-sm leading-none">N</span>
+          네이버로 상담 예약하기
+          <iconify-icon icon="solar:arrow-right-linear" width="18" class="group-hover:translate-x-1 transition-transform duration-500"></iconify-icon>
+        </a>
+
+        <!-- Secondary channels -->
+        <div class="grid grid-cols-2 gap-3">
+          <a href="http://pf.kakao.com/_PuLxej" target="_blank" rel="noopener"
+            class="py-3.5 rounded-full bg-white/[0.04] ring-1 ring-white/[0.08] text-white/70 font-medium text-sm hover:bg-white/[0.08] hover:text-white transition-all flex items-center justify-center gap-2">
+            <iconify-icon icon="ri:kakao-talk-fill" width="18" class="text-[#FEE500]"></iconify-icon>
+            카카오톡 문의
+          </a>
+          <a href="tel:01054120623"
+            class="py-3.5 rounded-full bg-white/[0.04] ring-1 ring-white/[0.08] text-white/70 font-medium text-sm hover:bg-white/[0.08] hover:text-white transition-all flex items-center justify-center gap-2">
+            <iconify-icon icon="solar:phone-bold" width="18" class="text-accent"></iconify-icon>
+            전화 문의
+          </a>
         </div>
-
-        <!-- Submit Button -->
-        <button type="submit" id="formSubmitBtn"
-          class="w-full py-4 rounded-full bg-accent text-white font-bold text-base hover:bg-accent-light hover:scale-[1.01] active:scale-[0.99] transition-all shadow-[0_0_40px_rgba(232,101,36,0.2)] flex items-center justify-center gap-2">
-          <span id="formSubmitText">상담 예약 신청하기</span>
-          <iconify-icon icon="solar:arrow-right-linear" width="18"></iconify-icon>
-        </button>
-      </form>
-
-      <!-- Success Message (hidden by default) -->
-      <div id="formSuccess" class="hidden text-center py-12">
-        <div class="text-5xl mb-4">&#x2705;</div>
-        <h3 class="text-2xl font-bold text-white mb-3">상담 예약이 접수되었습니다</h3>
-        <p class="text-base text-white/40">빠른 시간 내에 연락드리겠습니다.<br>감사합니다.</p>
       </div>
 
       <div class="reveal flex items-center justify-center gap-6 mt-8 text-sm text-white/30">
@@ -855,45 +1081,27 @@
     </div>
   </section>
 
-  <!-- Supabase SDK & Form Submit Script -->
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.min.js"></script>
-  <script>
-    const SUPABASE_URL = 'https://soklgkoysbmdbddtnnlj.supabase.co';
-    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNva2xna295c2JtZGJkZHRubmxqIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzE1NDg4MjIsImV4cCI6MjA4NzEyNDgyMn0.-yqc9JqYTeHmDMZ8u7Mrc8M5hmhHpk6oF3Qduv-_hkI';
-    const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_KEY);
-
-    document.getElementById('consultForm').addEventListener('submit', async function(e) {
-      e.preventDefault();
-      const btn = document.getElementById('formSubmitBtn');
-      const btnText = document.getElementById('formSubmitText');
-      btn.disabled = true;
-      btnText.textContent = '접수 중...';
-
-      const name = document.getElementById('formName').value.trim();
-      const phone = document.getElementById('formPhone').value.trim();
-      const service_type = document.getElementById('formService').value;
-      const privacy_agreed = document.getElementById('formPrivacy').checked;
-
-      const { error } = await supabase
-        .from('haesthetic_inquiries')
-        .insert([{ name, phone, service_type, privacy_agreed }]);
-
-      if (error) {
-        alert('접수 중 오류가 발생했습니다. 다시 시도해주세요.');
-        btn.disabled = false;
-        btnText.textContent = '상담 예약 신청하기';
-        return;
-      }
-
-      document.getElementById('consultForm').classList.add('hidden');
-      document.getElementById('formSuccess').classList.remove('hidden');
-    });
-  </script>
+  <!-- ============================================================ -->
+  <!-- MOBILE STICKY BOOKING BAR                                     -->
+  <!-- ============================================================ -->
+  <div class="md:hidden fixed bottom-0 left-0 right-0 z-50 px-3 pb-3 pt-2 bg-gradient-to-t from-dark-950 via-dark-950/95 to-transparent">
+    <div class="flex gap-2">
+      <a href="tel:01054120623"
+        class="w-14 h-12 rounded-full bg-white/[0.06] ring-1 ring-white/[0.1] backdrop-blur-xl flex items-center justify-center shrink-0">
+        <iconify-icon icon="solar:phone-bold" width="20" class="text-accent"></iconify-icon>
+      </a>
+      <a href="#" target="_blank" rel="noopener"
+        class="js-naver-booking flex-1 h-12 rounded-full bg-[#03C75A] text-white font-bold text-sm flex items-center justify-center gap-2 shadow-[0_4px_20px_rgba(3,199,90,0.3)]">
+        <span class="w-5 h-5 rounded bg-white text-[#03C75A] flex items-center justify-center font-display font-extrabold text-xs leading-none">N</span>
+        네이버 예약
+      </a>
+    </div>
+  </div>
 
   <!-- ============================================================ -->
   <!-- FOOTER                                                        -->
   <!-- ============================================================ -->
-  <footer class="border-t border-white/[0.06] py-12">
+  <footer class="border-t border-white/[0.06] py-12 pb-24 md:pb-12">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <!-- Top: Brand + Quick Contact -->
       <div class="flex flex-col md:flex-row items-start md:items-center justify-between gap-6 pb-8 border-b border-white/[0.06]">
@@ -905,6 +1113,10 @@
         <div class="flex items-center gap-6 text-xs text-white/40">
           <span>틀에 맞추지 않는 피부관리</span>
           <span class="text-white/10">|</span>
+          <a href="#" target="_blank" rel="noopener" class="js-naver-booking flex items-center gap-1.5 hover:text-white transition" aria-label="네이버 예약">
+            <span class="w-4 h-4 rounded-sm bg-[#03C75A] text-white flex items-center justify-center font-display font-extrabold text-[9px] leading-none">N</span>
+            <span class="hidden sm:inline">네이버 예약</span>
+          </a>
           <a href="http://pf.kakao.com/_PuLxej" target="_blank" rel="noopener" class="flex items-center gap-1.5 hover:text-white transition" aria-label="카카오톡 채널">
             <iconify-icon icon="ri:kakao-talk-fill" width="18"></iconify-icon>
             <span class="hidden sm:inline">카카오톡 채널</span>
@@ -951,6 +1163,16 @@
   <!-- SCROLL ANIMATION SCRIPT                                       -->
   <!-- ============================================================ -->
   <script>
+    // === Naver booking link (모든 예약 버튼에 일괄 적용) ===
+    const NAVER_PLACE_ID = '1720361257';
+    const isMobileDevice = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+    const NAVER_BOOKING_URL = isMobileDevice
+      ? 'https://m.place.naver.com/place/' + NAVER_PLACE_ID + '/ticket'
+      : 'https://pcmap.place.naver.com/place/' + NAVER_PLACE_ID + '/ticket?entry=plt';
+    document.querySelectorAll('.js-naver-booking').forEach((el) => {
+      el.href = NAVER_BOOKING_URL;
+    });
+
     // === General reveal observer ===
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
