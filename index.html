@@ -487,7 +487,9 @@
     @media (max-width: 860px) {
       .nav-links { display: none; }
       .nav-burger { display: flex; }
-      .nav-inner { padding: 0 24px; }
+      .nav-inner { padding: 0 20px; height: 64px; }
+      .nav-logo { font-size: 18px; letter-spacing: .1em; }
+      .nav-cta { padding: 9px 18px; font-size: 13px; white-space: nowrap; }
 
       .container, section.block, section.location-block, .cta-block, footer { padding-left: 24px; padding-right: 24px; }
       section.block { padding-top: 90px; padding-bottom: 96px; }
@@ -497,8 +499,16 @@
       h2.section-title { font-size: 32px; }
       .cta-inner h2 { font-size: 34px; }
 
-      .hero-content { padding: 130px 24px 110px; }
-      .hero h1 { font-size: 40px; }
+      /* 모바일: 영상을 원본 비율로 상단 배치, 텍스트는 아래로 스택 (잘림 방지) */
+      .hero { display: block; min-height: 0; }
+      .hero-bg { position: relative; inset: auto; margin-top: 64px; aspect-ratio: 16 / 9; background: var(--bg); }
+      .hero-bg video { object-fit: contain; }
+      .hero-overlay-x { display: none; }
+      .hero-overlay-y { background: linear-gradient(180deg, rgba(20,17,14,.2) 0%, rgba(20,17,14,0) 30%, rgba(20,17,14,0) 75%, #14110E 100%); }
+      .hero-scroll { display: none; }
+
+      .hero-content { padding: 20px 24px 80px; }
+      .hero h1 { font-size: 40px; margin-top: 24px; }
       .hero-desc { font-size: 15.5px; }
       .btn-primary, .btn-ghost { padding: 15px 28px; font-size: 14.5px; }
       .hero-stats { margin-top: 56px; }
